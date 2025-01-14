@@ -4,9 +4,19 @@
 
 {% block content %}
     <h2>Buscar Posts</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <form method="GET" action="{% url 'buscar_posts' %}">
+        <input type="text" name="q" placeholder="Buscar posts...">
+        <select name="seleccion">
+            <option value="">Seleccionar Post...</option>
+            {% for post in posts %}
+                <option value="{{ post.id }}">{{ post.titulo }}</option>
+            {% endfor %}
+        </select>
         <button type="submit">Buscar</button>
     </form>
+    <ul>
+        {% for post in resultados %}
+            <li>{{ post.titulo }} - {{ post.autor.nombre }} - {{ post.fecha_publicacion }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -38,6 +38,8 @@ def crear_post(request):
 
 def buscar_posts(request):
     query = request.GET.get('q')
-    resultados = Post.objects.filter(titulo__icontains=query) if query else []
-    return render(request, 'blog/buscar_posts.html', {'resultados': resultados})
-
+    seleccion = request.GET.get('seleccion')
+    resultados = Post.objects.filter(titulo__icontains=query) if query else Post.objects.all()
+    if seleccion:
+        resultados = resultados.filter(id=seleccion)
+    return render(request, 'blog/buscar_posts.html', {'resultados': resultados, 'posts': Post.objects.all()})
