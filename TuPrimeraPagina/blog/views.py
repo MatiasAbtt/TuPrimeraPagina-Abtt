@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import AutorForm, CategoriaForm, PostForm
 from .models import Post
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'blog/home.html')
 
 def crear_autor(request):
     if request.method == 'POST':
