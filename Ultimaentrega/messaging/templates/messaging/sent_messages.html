@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Mensajes Enviados{% endblock %}
+
+{% block content %}
+<h1>Mensajes Enviados</h1>
+{% if messages_sent %}
+    <ul>
+        {% for message in messages_sent %}
+            <li>
+                <strong>Para:</strong> {{ message.receiver.username }}<br>
+                <strong>Fecha:</strong> {{ message.timestamp }}<br>
+                <strong>Mensaje:</strong> {{ message.content }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No has enviado mensajes aún.</p>
+{% endif %}
+{% endblock %}
